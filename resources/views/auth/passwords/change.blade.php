@@ -2,9 +2,16 @@
 
 @section('content')
     <div class="container">
+
+        @if (session('errorMsg'))
+            <div class="alert alert-danger" role="alert">
+                {{  (session('errorMsg')) }}
+            </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+
+                            <div class="card">
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
@@ -12,12 +19,12 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="oldpasswold" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
+                                <label for="oldpassword" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="oldpasswold" type="text" class="form-control @error('oldpasswold') is-invalid @enderror" name="oldpasswold" value="{{ old('oldpasswold') }}" required autocomplete="oldpasswold" autofocus>
+                                    <input id="oldpassword" type="password" class="form-control @error('oldpassword') is-invalid @enderror" name="oldpassword" value="{{ old('oldpassword') }}" required autocomplete="oldpassword" autofocus>
 
-                                    @error('oldpasswold')
+                                    @error('oldpassword')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

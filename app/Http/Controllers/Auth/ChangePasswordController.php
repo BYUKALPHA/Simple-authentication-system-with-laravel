@@ -17,14 +17,15 @@ public function changepassword(Request $request){
     'oldpassword' => 'required',
     'password' => 'required|confirmed'
 ]);
-$hashedPassword = Auth::user()->password;
-if (Hash::check($request->oldpassword,$hashedPassword)){
-$user = User::find(Auth::id());
-$user->password = Hash::make($request->password);
-$user->save();
-return redirect()->route('login')->with('successMsg', 'Password was successfully changed');
-}else{
-    return redirect()->back()->with('errorMsg', 'Password is invalid');
-}
-}
-}
+             $hashedPassword = Auth::user()->password;
+                 if (Hash::check($request->oldpassword,$hashedPassword)){
+                           $user = User::find(Auth::id());
+                           $user->password = Hash::make($request->password);
+                           $user->save();
+                           Auth::logout();
+             return redirect()->route('login')->with('successMsg', 'Password was successfully changed');
+             }else{
+            return redirect()->back()->with('errorMsg', 'Password is invalid');
+           }
+        }
+     }
